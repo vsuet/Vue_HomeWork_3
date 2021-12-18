@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+</head>
+<body>
+<div id="app">
+    <h2>Добавление пользователя</h2>
+    <div>
+        <useritem v-for="(user, index) in users"
+                  :user="user"
+                  :key="index"
+                  :index="index"
+                  :removefn="remove">
+        </useritem>
+    </div>
+</div>
+<br>
+<a href="index.html">Обратно</a>
+<script src="https://unpkg.com/vue@next"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                users:[]
+            }
+        },
+        methods:{
+            remove(index){
+                this.users.splice(index, 1);
+            },
+            add(user){
+                this.users.push(user);
+            }
+        }
+    });
+
+    app.component('useritem', {
+        props: ["user", "index", "removefn"],
+        template: `<div>
+                    <p>Имя: {{user.name}} <br> Фамилия: {{user.surname}} <br> Любимое занятие: {{user.lesson}}</p>
+                    <button  v-on:click="removefn(index)">Delete</button>
+                </div>`
+    });
+    app.mount('#app');
+</script>
+</body>
+</html>
