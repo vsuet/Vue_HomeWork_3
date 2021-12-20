@@ -22,8 +22,7 @@
         </useritem>
     </div>
 </div>
-<br>
-<a href="Conclusion.html">Список</a>
+
 <script src="https://unpkg.com/vue@next"></script>
 <script src="https://unpkg.com/vue-router@next"></script>
 <script>
@@ -69,14 +68,10 @@
         props: ["user", "index", "removefn"],
 
         template: `<div>
-                    <h3>Выбравшие JS</h3>
+                    <h3>Пользователи</h3>
                     <p>Имя: {{user.name}} <br> Фамилия: {{user.surname}} <br> Любимое занятие: {{user.lesson}}</p>
                     <button  v-on:click="removefn(index)">Delete</button>
                 </div>`,
-        methods: {
-            return(value) {
-            }
-        }
     });
 
     app.mount('#app');
