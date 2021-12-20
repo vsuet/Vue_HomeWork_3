@@ -4,19 +4,14 @@
     <meta charset="UTF-8">
     <title>HomeWork</title>
     <style>
-        ul{list-style-type: none;padding: 15px;}
-        li{display: inline-block; justify-content: space-around}
+        ul{list-style-type: none;padding: 15px; display: flex; justify-content: space-around}
+        li{display: inline-flex; justify-content: space-around}
     </style>
+    <script src="add.js"></script>
 </head>
 <body>
 <div id="app">
     <h2>Добавление пользователя</h2>
-    <ul>
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/products">JavaScript</router-link></li>
-        <li><router-link to="/about">PHP</router-link></li>
-        <li><router-link to="/products">C++</router-link></li>
-    </ul>
     <userform :addfn="add"></userform>
     <div>
         <useritem v-for="(user, index) in users"
@@ -35,24 +30,26 @@
     const app = Vue.createApp({
         data(){
             return {
-                users:[]
+                users:[{name: 'Tom', surname: 'Tom', lesson:'JavaScript'},]
             }
         },
         methods:{
             remove(index){
                 this.users.splice(index, 1);
             },
+
             add(user){
                 this.users.push(user);
             }
         }
     });
 
+
     app.component('userform', {
         props: ["addfn"],
         data() {
             return {
-                user: {name:'', surname:'',lesson:''}
+                user: {name:'', surname:'',lesson:'',}
             }
         },
         template: `<div>
@@ -63,18 +60,28 @@
                     <select  v-model="user.lesson">
                       <option>JavaScript</option>
                       <option>PHP</option>
-                      <option>C++</option>
+                      <option id="C">C++</option>
                     </select>
                     <button  v-on:click="addfn({name:user.name, surname:user.surname, lesson: user.lesson})">Add</button>
-                </div>`
+                </div>`,
+        methods: {
+
+        }
     });
     app.component('useritem', {
         props: ["user", "index", "removefn"],
+
         template: `<div>
+                    <h3>Выбравшие JS</h3>
                     <p>Имя: {{user.name}} <br> Фамилия: {{user.surname}} <br> Любимое занятие: {{user.lesson}}</p>
                     <button  v-on:click="removefn(index)">Delete</button>
-                </div>`
+                </div>`,
+        methods: {
+            return(value) {
+            }
+        }
     });
+
     app.mount('#app');
 </script>
 </body>
