@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>HomeWork</title>
+    <style>
+        ul{list-style-type: none;padding: 15px; display: flex; justify-content: space-around}
+        li{display: inline-flex; justify-content: space-around}
+    </style>
+    <script src="add.js"></script>
+</head>
+<body>
+<div id="app">
+    <h2>Добавление пользователя</h2>
+    <userform :addfn="add"></userform>
+    <div>
+        <useritem v-for="(user, index) in users"
+                  :user="user"
+                  :key="index"
+                  :index="index"
+                  :removefn="remove">
+        </useritem>
+    </div>
+</div>
+
+<script src="https://unpkg.com/vue@next"></script>
+<script src="https://unpkg.com/vue-router@next"></script>
+<script>
+    const app = Vue.createApp({
+        data(){
+            return {
+                users:[{name: 'Tom', surname: 'Tom', lesson:'JavaScript'},]
+            }
+        },
+        methods:{
+            remove(index){
+                this.users.splice(index, 1);
+            },
+
+            add(user){
+                this.users.push(user);
+            }
+        }
+    });
+
+
+    app.component('userform', {
+        props: ["addfn"],
+        data() {
+            return {
+                user: {name:'', surname:'',lesson:'',}
+            }
+        },
+        template: `<div>
+                    <h3>Введите:</h3>
+                    <p>Имя:</p><input type="text" v-model="user.name" />
+                    <p>Фамилия:</p><input type="text" v-model="user.surname" />
+                    <p>Любимое занятие:</p>
+                    <select  v-model="user.lesson">
+                      <option>JavaScript</option>
+                      <option>PHP</option>
+                      <option>C++</option>
+                    </select>
+                    <button  v-on:click="addfn({name:user.name, surname:user.surname, lesson: user.lesson})">Add</button>
+                </div>`,
+    });
+    app.component('useritem', {
+        props: ["user", "index", "removefn"],
+
+        template: `<div>
+                    <h3>Пользователи</h3>
+                    <p>Имя: {{user.name}} <br> Фамилия: {{user.surname}} <br> Любимое занятие: {{user.lesson}}</p>
+                    <button  v-on:click="removefn(index)">Delete</button>
+                </div>`,
+    });
+
+    app.mount('#app');
+</script>
+</body>
+</html>
