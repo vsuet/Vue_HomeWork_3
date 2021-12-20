@@ -60,13 +60,10 @@
                     <select  v-model="user.lesson">
                       <option>JavaScript</option>
                       <option>PHP</option>
-                      <option id="C">C++</option>
+                      <option>C++</option>
                     </select>
                     <button  v-on:click="addfn({name:user.name, surname:user.surname, lesson: user.lesson})">Add</button>
                 </div>`,
-        methods: {
-
-        }
     });
     app.component('useritem', {
         props: ["user", "index", "removefn"],
