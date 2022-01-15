@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Homework</title>
+</head>
+<body>
+	<p><a href="index.html">Добавить пользователя</a> | <a href="index2.html">Список людей</a></p>
+
+	<div id="app">
+		<p>Имя: <input type="text" v-model="user.name"></p>
+		<p>Фамилия: <input type="text" v-model="user.surname"></p>
+		<p>Изучаемый язык програмирования: 
+			<select v-model="user.lesson">
+				<option>JavaScript</option>
+				<option>PHP</option>
+				<option>Python</option>
+				<option>C</option>
+				<option>C++</option>
+				<option>C#</option>
+				<option>Scratch</option>
+			</select>
+		</p>
+		<button v-on:click="add({name:user.name, surname:user.surname, lesson: user.lesson})">Добавить</button>
+
+		<br>
+
+		<h2>Пользователи</h2>
+
+		<div v-for="(user, index) in users">
+			<p>{{ user.surname }} {{ user.name }} <br> {{user.lesson}}</p>
+			<button v-on:click="remove(index)">Удалить</button>
+		</div>
+	</div>
+
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://unpkg.com/vue-router@next"></script>
+
+	<script>
+		Vue.createApp({
+			data() {
+				return {
+					user: {name:'', surname:'',lesson:''},
+					users:[{name: 'Yura', surname: 'Rudnev', lesson: 'PHP'}]
+				}
+			},
+			methods: {
+				remove(index) {
+					this.users.splice(index, 1);
+				},
+				add(user) {
+					this.users.push(user);
+				}
+			}
+		}).mount('#app');
+	</script>
+</body>
+</html>
