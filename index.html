@@ -6,6 +6,8 @@
 	<title>Homework</title>
 </head>
 <body>
+	<p><a href="index.html">Добавить пользователя</a> | <a href="index2.html">Список людей</a></p>
+
 	<div id="app">
 		<p>Имя: <input type="text" v-model="user.name"></p>
 		<p>Фамилия: <input type="text" v-model="user.surname"></p>
@@ -17,6 +19,7 @@
 				<option>C</option>
 				<option>C++</option>
 				<option>C#</option>
+				<option>Scratch</option>
 			</select>
 		</p>
 		<button v-on:click="add({name:user.name, surname:user.surname, lesson: user.lesson})">Добавить</button>

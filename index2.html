@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Homework</title>
+</head>
+<body>
+	<p><a href="index.html">Добавить пользователя</a> | <a href="index2.html">Список людей</a></p>
+
+	<div id="app">
+		<p>Введите язык программирования: <input type="text" v-model="lesson"></p>
+
+		<br>
+
+		<h2>Пользователи</h2>
+
+		<div v-for="(user, index) in filteredList">
+			<p>{{ user.surname }} {{ user.name }} <br> {{user.lesson}}</p>
+		</div>
+	</div>
+	
+	<script src="https://unpkg.com/vue@next"></script>
+	<script src="https://unpkg.com/vue-router@next"></script>
+
+	<script>
+		Vue.createApp({
+			data() {
+				return {
+					lesson: '',
+					users: [
+						{name: 'Yura', surname:'Rudnev', lesson: 'PHP'},
+						{name: 'Ivan', surname:'Ivanov', lesson: 'JavaScript'},
+						{name: 'Alexander', surname:'Zagray', lesson: 'Python'},
+						{name: 'Danil', surname:'Petrifish', lesson: 'Scratch'},
+						{name: 'Valera', surname:'Budkov', lesson: 'JavaScript'},
+						{name: 'Dima', surname:'Ryabov', lesson: 'C++'},
+						{name: 'Vadim', surname:'Kholodov', lesson: 'C#'}
+					]
+				}
+			},
+			computed: {
+				filteredList() {
+					var language = this.lesson;
+					return this.users.filter(function (elem) {
+						if(language==='') return true;
+						else return elem.lesson.indexOf(language) > -1;
+					})
+				}
+			}
+		}).mount('#app');
+	</script>
+
+</body>
+</html>
